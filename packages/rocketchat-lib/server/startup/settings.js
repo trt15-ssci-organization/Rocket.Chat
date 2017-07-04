@@ -158,6 +158,122 @@ RocketChat.settings.addGroup('Accounts', function() {
 		});
 	});
 
+	this.section('Default_User_Settings', function() {
+		this.add('Default_User_Settings_desktopNotificationDuration', 5, {
+			type: 'int',
+			'public': true,
+			i18nLabel: 'Notification_Duration'
+		});
+		this.add('Default_User_Settings_unreadAlert', true, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Unread_Tray_Icon_Alert'
+		});
+		this.add('Default_User_Settings_useEmojis', true, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Use_Emojis'
+		});
+		this.add('Default_User_Settings_convertAsciiEmoji', true, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Convert_Ascii_Emojis'
+		});
+		this.add('Default_User_Settings_autoImageLoad', true, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Auto_Load_Images'
+		});
+		this.add('Default_User_Settings_saveMobileBandwidth', true, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Save_Mobile_Bandwidth'
+		});
+		this.add('Default_User_Settings_collapseMediaByDefault', false, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Collapse_Embedded_Media_By_Default'
+		});
+		this.add('Default_User_Settings_unreadRoomsMode', false, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Unread_Rooms_Mode'
+		});
+		this.add('Default_User_Settings_hideUsernames', false, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Hide_usernames'
+		});
+		this.add('Default_User_Settings_hideRoles', false, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Hide_roles'
+		});
+		this.add('Default_User_Settings_hideFlexTab', false, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Hide_flextab'
+		});
+		this.add('Default_User_Settings_hideAvatars', false, {
+			type: 'boolean',
+			'public': true,
+			i18nLabel: 'Hide_Avatars'
+		});
+		this.add('Default_User_Settings_sendOnEnter', 'normal', {
+			type: 'select',
+			values: [
+				{
+					key: 'normal',
+					i18nLabel: 'Enter_Normal'
+				},
+				{
+					key: 'alternative',
+					i18nLabel: 'Enter_Alternative'
+				},
+				{
+					key: 'desktop',
+					i18nLabel: 'Only_On_Desktop'
+				}
+			],
+			'public': true,
+			i18nLabel: 'Enter_Behaviour'
+		});
+		this.add('Default_User_Settings_viewMode', 0, {
+			type: 'select',
+			values: [
+				{
+					key: 0,
+					i18nLabel: 'Normal'
+				},
+				{
+					key: 1,
+					i18nLabel: 'Cozy'
+				},
+				{
+					key: 2,
+					i18nLabel: 'Compact'
+				}
+			],
+			'public': true,
+			i18nLabel: 'View_mode'
+		});
+		this.add('Default_User_Settings_emailNotificationMode', 'all', {
+			type: 'select',
+			values: [
+				{
+					key: 'disabled',
+					i18nLabel: 'Email_Notification_Mode_Disabled'
+				},
+				{
+					key: 'all',
+					i18nLabel: 'Email_Notification_Mode_All'
+				}
+			],
+			'public': true,
+			i18nLabel: 'Email_Notification_Mode'
+		});
+});
+
 	this.section('Avatar', function() {
 		this.add('Accounts_AvatarResize', true, {
 			type: 'boolean'

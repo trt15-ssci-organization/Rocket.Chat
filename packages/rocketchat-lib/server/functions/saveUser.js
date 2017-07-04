@@ -81,6 +81,18 @@ RocketChat.saveUser = function(userId, userData) {
 			updateUser.$set['emails.0.verified'] = true;
 		}
 
+		const defaultUserSettings = _.object(
+			_.map(
+				RocketChat.models.Settings.find({ section: 'Default_User_Settings' }).fetch(),
+				function(el) {
+					const id = el._id.replace('Default_User_Settings_', '');
+					return [ id, el.value ];
+				}
+			)
+		);
+
+		updateUser.$set['settings.preferences'] = defaultUserSettings;
+
 		Meteor.users.update({ _id }, updateUser);
 
 		if (userData.sendWelcomeEmail) {
