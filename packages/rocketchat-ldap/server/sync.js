@@ -63,6 +63,7 @@ getDataToSyncUserData = function getDataToSyncUserData(ldapUser, user) {
 	const syncUserDataFieldMap = RocketChat.settings.get('LDAP_Sync_User_Data_FieldMap').trim();
 
 	if (syncUserData && syncUserDataFieldMap) {
+		const whitelistedUserFields = ['email', 'name', 'customFields'];
 		const fieldMap = JSON.parse(syncUserDataFieldMap);
 		const userData = {};
 
@@ -83,17 +84,16 @@ getDataToSyncUserData = function getDataToSyncUserData(ldapUser, user) {
 					}
 					break;
 
-				case 'name':
-					if (user.name !== ldapUser.object[ldapField]) {
-						userData.name = ldapUser.object[ldapField];
+				default:
+					if (!_.find(whitelistedUserFields, (el) => el === userField.split('.')[0])) {
+						logger.debug(`user attribute not whitelisted: ${ userField }`);
+						return;
 					}
-					break;
 
-				case 'tag':
-					if (user.tag !== ldapUser.object[ldapField]) {
-						userData.tag = ldapUser.object[ldapField];
+					if (user[userField] !== ldapUser.object[ldapField]) {
+						userData[userField] = ldapUser.object[ldapField];
+						logger.debug(`user.${ userField } changed to: ${ ldapUser.object[ldapField] }`);
 					}
-					break;
 			}
 		});
 

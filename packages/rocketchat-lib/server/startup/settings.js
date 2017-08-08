@@ -70,6 +70,14 @@ RocketChat.settings.addGroup('Accounts', function() {
 		type: 'boolean',
 		'public': true
 	});
+	this.add('Accounts_CustomFieldsToShowInUserInfo', '', {
+		type: 'string',
+		public: true
+	});
+	this.add('Accounts_SearchFields', 'username, name, status', {
+		type: 'string',
+		public: true
+	});
 
 	this.section('Registration', function() {
 		this.add('Accounts_DefaultUsernamePrefixSuggestion', 'user', {
@@ -272,7 +280,7 @@ RocketChat.settings.addGroup('Accounts', function() {
 			'public': true,
 			i18nLabel: 'Email_Notification_Mode'
 		});
-});
+	});
 
 	this.section('Avatar', function() {
 		this.add('Accounts_AvatarResize', true, {

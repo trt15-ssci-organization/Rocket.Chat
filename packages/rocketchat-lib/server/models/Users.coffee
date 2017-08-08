@@ -115,22 +115,20 @@ class ModelUsers extends RocketChat.models._Base
 		if not _.isArray exceptions
 			exceptions = [ exceptions ]
 
+		orQuery = (fields, termRegex, result = {}, pKey = '') ->
+		  for key, value of fields
+		    if typeof value isnt 'object'
+		      result["#{pKey}#{key}"] = termRegex
+		    else
+		      orQuery(value, termRegex, result, "#{pKey}#{key}.")
+		  result
+
 		termRegex = new RegExp s.escapeRegExp(searchTerm), 'i'
 		query =
 			$and: [
 				{
 					active: true
-					$or: [
-						{
-							username: termRegex
-						}
-						{
-							name: termRegex
-						}
-						{
-							tag: termRegex
-						}
-					]
+					$or: { "#{k}" : v } for k, v of orQuery(options.fields, termRegex)
 				}
 				{
 					username: { $exists: true, $nin: exceptions }
